@@ -1,0 +1,46 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><i>{ VancouverStore }</i></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Products</a>
+                </li><li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                </li><li class="nav-item">
+                    <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+        <div class="mr-2">
+          <form method="GET" action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-1" name="search_keyword" placeholder="Search" >
+                <button class="btn btn-sm btn-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+        </div>
+        <div class="form-inline my-2 my-lg-0">
+
+            {% if not request.user.is_authenticated or request.user.is_superuser %}
+            <a href="{% url 'user_register' %}" class="btn btn-sm btn-primary ml-1">Register</a>
+            <a href="{% url 'user_login' %}" class="btn btn-sm btn-success ml-1">Login</a>
+
+            {% elif not request.user.is_superuser and request.user.is_authenticated %}
+            <span class="text-warning">hello! {{request.user.username}}</span>
+            <a href="{% url 'user_logout' %}" class="btn btn-sm btn-info ml-1">Logout</a>
+            <a href="{% url 'password_change' %}" class="btn btn-sm btn-info ml-1">change password</a>
+            {% endif %}
+
+            <a href="{% url 'cart' %}">
+                <img src="{% static 'images/cart.png' %}" alt="" id="cart-icon">
+            </a>
+            <p id="cart-total">{{cartItems}}</p>
+        </div>
+    </div>
+</nav>

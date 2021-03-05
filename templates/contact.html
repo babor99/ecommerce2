@@ -1,0 +1,39 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}
+Contact
+{% endblock %}
+{% block content %}
+<div class="" style="min-height: 550px; width: 100%; opacity: 0.9;">
+    <div class="row">
+        <div class="col-md-10 justify-content-center align-items-center text-center mt-5">
+            <h1 class="text-danger">Contact Us.</h4>
+                <h4 class="text-warning">Learn what we do. Your best choice</h3>
+                    <p class="text-gray-dark text-justify">The Big Bang theory is a cosmological model of the observable universe from the earliest known periods through its subsequent large-scale evolution. The model describes how the universe expanded from an initial state of extremely high density and high temperature,[4] and offers a comprehensive explanation for a broad range of observed phenomena, including the abundance of light elements, the cosmic microwave background (CMB) radiation, and large-scale structure.
+                    </p>
+        </div>
+    </div>
+    <div class="row " style="margin-top:60px;">
+        <div class="col-md-5">
+            <h4>Our Permanent Address</h4>
+            <hr>
+            <p>23/A, Green City</p>
+            <p>Manitoba-1223, Montreal, Canada</p>
+            <p>Email: islambabor947@gmail.com</p>
+            <p>Phone: +8801521569335, +8801623444051</p>
+        </div>
+        <div class="col-md-5">
+            <h4>Send Your Message</h4><hr>
+            <form action="{% url 'contact' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{form.as_p}}
+                    <input class="btn btn-primary btn-sm" type="submit" value="Submit"> 
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}
